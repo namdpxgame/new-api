@@ -1,0 +1,18 @@
+# XGAME: chạy thử trên máy local, không HTTPS, không Caddy.
+# docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build
+# Mở http://127.0.0.1:3000
+
+services:
+  new-api:
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      SESSION_COOKIE_SECURE: "false"
+      SESSION_COOKIE_TRUSTED_URL: ""
+
+  postgres:
+    ports:
+      - "127.0.0.1:5441:5432"
+
+  caddy:
+    profiles: ["https"]

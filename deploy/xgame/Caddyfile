@@ -1,0 +1,17 @@
+# XGAME: reverse proxy HTTPS cho new-api. Caddy tự xin chứng chỉ Let's Encrypt cho {$DOMAIN}.
+{
+	email {$ACME_EMAIL}
+}
+
+{$DOMAIN} {
+	encode zstd gzip
+
+	reverse_proxy new-api:3000 {
+		# Stream SSE (chat streaming) đi thẳng tới client, không buffer.
+		flush_interval -1
+		transport http {
+			read_timeout 30m
+			write_timeout 30m
+		}
+	}
+}
