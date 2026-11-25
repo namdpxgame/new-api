@@ -46,6 +46,7 @@ func DisableChannel(channelError types.ChannelError, reason string) {
 		NotifyChannelWatchers(formatNotifyType(channelError.ChannelId, common.ChannelStatusAutoDisabled), func(lang string) (string, string) {
 			return i18n.Translate(lang, i18n.MsgChannelNotifyDisabledSubject, params), i18n.Translate(lang, i18n.MsgChannelNotifyDisabledContent, params)
 		})
+		xgameNotifyChannelDisabled(params) // XGAME:
 		if common.IsMasterNode && channel != nil {
 			scheduledPlugins.disabled(channel, channelError.UsingKey, time.Now())
 		}

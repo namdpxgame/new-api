@@ -374,6 +374,7 @@ func runScheduledPlugin(ctx context.Context, channel *model.Channel, plugin *jsp
 		subject, content := i18n.MsgChannelNotifyEnabledSubject, i18n.MsgChannelNotifyEnabledContent
 		if status == common.ChannelStatusAutoDisabled {
 			subject, content = i18n.MsgChannelNotifyDisabledSubject, i18n.MsgChannelNotifyDisabledContent
+			xgameNotifyChannelDisabled(params) // XGAME:
 			if stored.Status == common.ChannelStatusAutoDisabled {
 				CloseActiveWebSocketsForChannel(stored.Id, ChannelDisabledCloseReason)
 			}
